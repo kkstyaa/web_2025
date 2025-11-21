@@ -1,0 +1,321 @@
+.dishes_cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки одинаковой ширины */
+    gap: 10px; /* Отступ между элементами */
+    margin: 20px 0;
+}
+.dish_card {
+    display: flex;
+    flex-direction: column; /* Вертикальное направление */
+    padding: 30px 40px; /* 30px сверху/снизу, 40px справа/слева */
+    border-radius: 35px; /* Закругление углов */
+    cursor: pointer; /* Вид курсора */
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13)); /* Тень */
+    background-color: white; /* Белый фон */
+    
+    /* Чтобы кнопка и вес всегда были внизу */
+    justify-content: space-between;
+    min-height: 400px; /* Минимальная высота для выравнивания */
+
+    border: 2px solid transparent; /* Прозрачная граница по умолчанию */
+    transition: border-color 0.3s ease, transform 0.3s ease; /* Плавный переход */
+}
+.dish_card:hover {
+    border-color: #fce592; /* Граница цвета tomato при наведении */
+    transform: translateY(-5px); /* Легкое поднятие для эффекта */
+}
+.dish_card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 35px;
+    margin-bottom: 15px;
+}
+.dish_card .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #321832;
+    margin: 10px 0;
+}
+.dish_card .name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+    flex-grow: 1; /* Занимает доступное пространство */
+}
+.dish_card .weight {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0;
+}
+.dish_card button {
+    background-color: #fce592;
+    color: black;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.dish_card button:hover {
+    background-color: #f9d467;
+    transform: translateY(-2px);
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ СТРАНИЦЫ "СОБРАТЬ ЛАНЧ" */
+
+/* ≤800px */
+@media (max-width: 800px) {
+    .dishes_cards {
+        grid-template-columns: repeat(2, 1fr); /* Кол-во колонок: 2 */
+    }
+    
+    .navigation nav {
+        justify-content: space-between; /* Выравнивание с равным расстоянием между элементами */
+    }
+    
+    .company_name h1 {
+        text-align: center; /* Выравнивание текста: по центру */
+    }
+}
+
+/* ≤600px */
+@media (max-width: 600px) {
+    .dishes_cards {
+        grid-template-columns: 1fr; /* Кол-во колонок: 1 */
+    }
+    
+    .navigation nav {
+        flex-direction: column; /* Направление элементов: вертикальное */
+        align-items: center; /* Выравнивание по центру поперечной оси */
+    }
+    
+    .navigation a {
+        font-size: 22px; /* Увеличение шрифта на 4px (18px + 4px) */
+    }
+    
+    section h2 {
+        text-align: center; /* Выравнивание текста: по центру */
+    }
+}
+
+/*СТИЛИ ДЛЯ ФОРМЫ*/
+
+.order-form-section {
+  margin: 50px 0;
+  padding: 30px 0;
+}
+
+.order-form-section h2 {
+  color: #321832;
+  font-size: 32px;
+  margin-bottom: 30px;
+  text-align: center;
+  border-bottom: 3px solid #fce592;
+  padding-bottom: 15px;
+}
+
+.order-form {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.form-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.order-column h3,
+.client-column h3 {
+  color: #321832;
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f1eee9;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #321832;
+  font-size: 16px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="time"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "Public Sans", sans-serif;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #fce592;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Стили для чекбокса и радиокнопок */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+}
+
+.checkbox-group label {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+  width: auto;
+  margin: 0;
+}
+.form-note {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Стили для кнопок */
+.form-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.btn-reset,
+.btn-submit {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Public Sans", sans-serif;
+}
+
+.btn-reset {
+  background-color: #f1eee9;
+  color: #321832;
+}
+
+.btn-reset:hover {
+  background-color: #e0ddd9;
+  transform: translateY(-2px);
+}
+
+.btn-submit {
+  background-color: #fce592;
+  color: #321832;
+}
+
+.btn-submit:hover {
+  background-color: #f9d467;
+  transform: translateY(-2px);
+}
+/* Стили для радиокнопок */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.radio-option label {
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ ФОРМЫ */
+@media (max-width: 800px) {
+  .form-columns {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .order-form {
+    padding: 30px 20px;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .order-form-section {
+    margin: 30px 0;
+  }
+  
+  .order-form-section h2 {
+    font-size: 28px;
+  }
+  
+  .order-column h3,
+  .client-column h3 {
+    font-size: 20px;
+  }
+}

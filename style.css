@@ -8,23 +8,34 @@ body{
   font-weight: 400; 
   font-style: normal;
   margin: 0;
+  min-height: 100vh; /*для фиксированного футера*/
+  display: flex;
+  flex-direction: column;
 }
 .container {
-  margin-left: 140px;
+  margin-left: 100px;
   margin-top: 40px;
+  margin-right: 40px;
   max-width: 1200px; 
+  flex: 1; /*занимает все доступное пространство*/
 }
-.company_name{
+.company_name h1{
   font-family: "Rouge Script", cursive;
   font-weight: 400;
   font-style: normal;
+}
+
+.navigation nav {
+  display: flex; /*включаем flexbox*/
+  flex-wrap: wrap; /*перенос на новые строки */
+  gap: 15px; /*отступ между элементами*/
 }
 
 .navigation a {
   color: black; 
   font-size: 18px;
   font-weight:700;
-  padding: 0 20px 0 0;
+  padding: 8px 0;
   text-decoration: none;
 }
   
@@ -32,9 +43,17 @@ body{
   transition: color 1s;
   color: #fce592; 
 }
+.navigation a#active {
+  color: #fce592;
+  border-radius: 6px;
+}
 
-.main_photo{
-  padding: 10px 0 10px 0;
+.main_photo img{
+  width: 100%; /* Занимает всю ширину контейнера */
+  max-width: 100%; /* Не превышает ширину родителя */
+  height: auto; /* Сохраняет пропорции */
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 .about{
     text-align: justify;
@@ -51,6 +70,13 @@ ul, ol {
     font-size: 18px;
     width: 800px;
 }
+.advantages ul li {
+  position: relative;
+  margin-bottom: 12px;
+}
+.advantages ul li:hover {
+  transform: translateX(5px); /*двигает элемент на 5 пикселей вправо по горизонтальной оси X*/
+}
 th, td{
   border: 1px solid black;
   padding: 12px 15px;
@@ -62,6 +88,12 @@ table{
   max-width: 800px;
   font-size: 20px;
   text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+tr:hover {
+  background-color: #fff9e6;
+  transition: background-color 0.3s ease;
 }
 footer{
   background-color: #321832;
@@ -69,6 +101,9 @@ footer{
   padding: 15px 0;
   font-weight: 600;
   font-size: 15px;
+  width: 100%;
+  margin-top: auto; /*прижимает футер к низу*/
+  box-sizing: border-box;
 }
 .contacts{
   padding-left: 140px;
@@ -81,4 +116,79 @@ footer{
   transition: color 1s;
   color: #fce592; 
   font-size: 14px;
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ */
+/* ≤800px */
+@media (max-width: 800px) {
+  .container {
+    /*margin-left: 20px;
+    margin-right: 20px;*/
+    padding: 0 20px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .main_photo img {
+    width: 500px; /*ширина изображения: 500px */
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .navigation nav {
+    justify-content: space-between; /*выравнивание с равным расстоянием между элементами*/
+    gap: 0; /*убираем отступы для правильного space-between */
+  }
+  
+  .company_name h1 {
+    text-align: center; /*выравнивание заголовка по центру */
+  }
+  
+  .about, .advantages {
+    width: 100%; /*ширина блоков на всю доступную ширину*/
+  }
+  
+  .contacts {
+    padding-left: 20px; /*отступ контактов для мобильной версии*/
+  }
+}
+
+/* ≤600px */
+@media (max-width: 600px) {
+  .navigation nav {
+    flex-direction: column; /*вертикальное направление элементов */
+    align-items: center; /*ыравнивание по центру поперечной оси */
+    gap: 10px;
+  }
+  
+  .navigation a {
+    font-size: 22px; /*увеличение шрифта ссылок на 4px (18px + 4px) */
+  }
+  
+  .company_name h1 {
+    text-align: center; /*выравнивание главного заголовка по центру */
+  }
+  
+  section h2 {
+    text-align: center; /*выравнивание заголовков разделов по центру */
+  }
+  
+  .main_photo img {
+    width: 100%; /*ширина изображения: 100% */
+  }
+  
+  table {
+    font-size: 18px; /* уменьшение шрифта таблицы на 2px (20px - 2px) */
+  }
+}
+
+/* ≤400px */
+@media (max-width: 400px) {
+  table {
+    font-size: 16px; /*уменьшение шрифта таблицы еще на 2px (18px - 2px) */
+  }
+  
+  .main_photo img {
+    width: 100%; /*ширина изображения: 100% */
+  }
 }
