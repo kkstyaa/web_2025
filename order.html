@@ -26,6 +26,113 @@
   </header>
 
   <main class="container">
+     <!-- БЛОК С ВАРИАНТАМИ -->
+    <section class="lunch-variants">
+      <h2>Доступные для заказа комбо</h2>
+      <div class="lunch-grid">
+        <!-- Вариант 1: Суп, Главное блюдо, Салат, Напиток -->
+        <div class="lunch-option">
+          <div class="lunch-content">
+            <div class="lunch-item">
+              <img src="icons/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Вариант 2: Суп, Главное блюдо, Напиток -->
+        <div class="lunch-option">
+          <div class="lunch-content">
+            <div class="lunch-item">
+              <img src="icons/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Вариант 3: Суп, Салат, Напиток -->
+        <div class="lunch-option">
+          <div class="lunch-content">
+            <div class="lunch-item">
+              <img src="icons/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Вариант 4: Главное блюдо, Салат, Напиток -->
+        <div class="lunch-option">
+          <div class="lunch-content">
+            <div class="lunch-item">
+              <img src="icons/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Вариант 5: Главное блюдо, Напиток -->
+        <div class="lunch-option">
+          <div class="lunch-content">
+            <div class="lunch-item">
+              <img src="icons/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="lunch-item">
+              <img src="icons/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Вариант 6: Десерт -->
+        <div class="lunch-option">
+          <div class="lunch-content">
+            <div class="lunch-item">
+              <img src="icons/desert.png" alt="Десерт">
+              <p>Десерт</p>
+              <div class="dessert-note">(Можно добавить к любому заказу)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="soups">
       <h2>Выберите суп</h2>
       <div class="filters">
@@ -94,6 +201,19 @@
           <div class="order-column">
             <!-- Сводка заказа будет добавлена динамически -->
           </div>
+            <!-- Поле комментариев -->
+        <div class="form-group">
+          <label for="comments">Комментарии к заказу</label>
+          <textarea 
+            id="comments" 
+            name="comments" 
+            rows="4" 
+            placeholder="Например: не добавлять лук, специи отдельно и т.д."
+          ></textarea>
+          <small class="form-note">Необязательное поле</small>
+        </div>
+      </div>
+
 
           <!-- Блок с данными клиента -->
           <div class="client-column">

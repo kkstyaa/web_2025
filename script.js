@@ -290,11 +290,33 @@ let activeFilters = {
   dessert: null
 };
 
+//определяем возможные комбинации комбо
+const validCombos = [
+  // Комбо 1: Суп, Главное блюдо, Салат, Напиток
+  { soup: true, main: true, salad_starter: true, drink: true },
+  // Комбо 2: Суп, Главное блюдо, Напиток
+  { soup: true, main: true, drink: true },
+  // Комбо 3: Суп, Салат, Напиток
+  { soup: true, salad_starter: true, drink: true },
+  // Комбо 4: Главное блюдо, Салат, Напиток
+  { main: true, salad_starter: true, drink: true },
+  // Комбо 5: Главное блюдо, Напиток
+  { main: true, drink: true },
+  // Комбо 6: Десерт (можно к любому)
+  { dessert: true }
+];
+
 //основная функция инициализации
 document.addEventListener('DOMContentLoaded', function() {
   displayAllDishes();
   setupEventListeners();
   updateOrderSummary();
+
+  // Находим форму и добавляем обработчик отправки
+  const orderForm = document.querySelector('.order-form');
+  if (orderForm) {
+    orderForm.addEventListener('submit', validateForm);
+  }
 });
 
 //функция отображения всех блюд
@@ -594,3 +616,183 @@ function updateFormSelects() {
     drinkSelect.value = selectedDishes.drink.keyword;
   }
 }
+
+// НОВЫЕ ФУНКЦИИ ДЛЯ ПРОВЕРКИ КОМБО И УВЕДОМЛЕНИЙ
+
+// Функция проверки, соответствует ли выбранный набор одному из комбо
+function isValidCombo(selected) {
+  // Проверяем каждое комбо
+  for (const combo of validCombos) {
+    let matches = true;
+    
+    // Проверяем все поля комбо
+    for (const [key, required] of Object.entries(combo)) {
+      if (required && !selected[key]) {
+        matches = false;
+        break;
+      }
+      
+      // Проверяем, что нет лишних блюд (кроме десерта)
+      if (!required && key !== 'dessert' && selected[key]) {
+        // Для комбо 6 (только десерт) разрешаем иметь другие блюда
+        if (!(combo.dessert && !combo.soup && !combo.main && !combo.salad_starter && !combo.drink)) {
+          matches = false;
+          break;
+        }
+      }
+    }
+    
+    if (matches) {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+// Функция определения типа уведомления
+function getNotificationType(selected) {
+  const hasSoup = !!selected.soup;
+  const hasMain = !!selected.main;
+  const hasDrink = !!selected.drink;
+  const hasSaladStarter = !!selected.salad_starter;
+  const hasDessert = !!selected.dessert;
+  
+  // Проверяем, есть ли хоть одно блюдо
+  const totalSelected = Object.values(selected).filter(Boolean).length;
+  
+  //Ничего не выбрано
+  if (totalSelected === 0) {
+    return {
+      type: 'nothing_selected',
+      message: 'Ничего не выбрано. Выберите блюда для заказа',
+      image: 'sad.jpg'
+    };
+  }
+  
+  // Проверяем комбо с десертом
+  if (hasDessert && !hasSoup && !hasMain && !hasSaladStarter && !hasDrink) {
+    // Только десерт - это валидное комбо 6
+    return null;
+  }
+  
+  // Проверяем невалидные комбинации
+  
+  // Выбраны все необходимые блюда, кроме напитка
+  if ((hasSoup && hasMain && hasSaladStarter && !hasDrink) || 
+      (hasSoup && hasMain && !hasDrink) ||
+      (hasSoup && hasSaladStarter && !hasDrink) ||
+      (hasMain && hasSaladStarter && !hasDrink) ||
+      (hasMain && !hasDrink)) {
+    return {
+      type: 'no_drink',
+      message: 'Выберите напиток',
+      image: 'sad.jpg'
+    };
+  }
+  
+  // Выбран суп, но не выбраны главное блюдо/салат/стартер
+  if (hasSoup && !hasMain && !hasSaladStarter) {
+    return {
+      type: 'no_main_or_salad',
+      message: 'Выберите главное блюдо/салат/стартер',
+      image: 'sad.jpg'
+    };
+  }
+  
+  // Выбран салат/стартер, но не выбраны суп/главное блюдо
+  if (hasSaladStarter && !hasSoup && !hasMain) {
+    return {
+      type: 'no_soup_or_main',
+      message: 'Выберите суп или главное блюдо',
+      image: 'sad.jpg'
+    };
+  }
+  
+  // Выбран напиток/десерт
+  if ((hasDrink || hasDessert) && !hasSoup && !hasMain && !hasSaladStarter) {
+    return {
+      type: 'no_main',
+      message: 'Выберите главное блюдо',
+      image: 'sad.jpg'
+    };
+  }
+  
+  // Проверяем все возможные неполные комбинации
+  if (!isValidCombo(selected)) {
+    // Общий случай - что-то не так с комбо
+    return {
+      type: 'invalid_combo',
+      message: 'Выбранные блюда не соответствуют ни одному комбо',
+      image: 'sad.jpg'
+    };
+  }
+  
+  return null; // Валидное комбо
+}
+
+// Функция создания уведомления
+function createNotification(message, imageSrc) {
+  // Создаем overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'notification-overlay';
+  
+  // Создаем само уведомление
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  
+  notification.innerHTML = `
+    <div class="notification-content">
+      ${imageSrc ? `<img src="${imageSrc}" alt="Уведомление" class="notification-image">` : ''}
+      <p class="notification-message">${message}</p>
+      <button class="notification-ok">Окей</button>
+    </div>
+  `;
+  
+  overlay.appendChild(notification);
+  document.body.appendChild(overlay);
+  
+  // Добавляем обработчик для кнопки
+  const okButton = notification.querySelector('.notification-ok');
+  okButton.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+  
+  // Добавляем обработчик hover для кнопки
+  okButton.addEventListener('mouseenter', function() {
+    this.style.backgroundColor = '#f9d467';
+    this.style.color = '#321832';
+  });
+  
+  okButton.addEventListener('mouseleave', function() {
+    this.style.backgroundColor = '#fce592';
+    this.style.color = '#321832';
+  });
+  
+  // Закрытие по клику на overlay
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      document.body.removeChild(overlay);
+    }
+  });
+}
+
+// Функция валидации формы
+function validateForm(e) {
+  // Проверяем выбранные блюда
+  const notification = getNotificationType(selectedDishes);
+  
+  if (notification) {
+    e.preventDefault(); // Блокируем отправку
+    
+    // Показываем уведомление об ошибке
+    createNotification(notification.message, notification.image);
+    return false;
+  }
+  
+  // Если все ок - форма отправится сама, т.к. не вызываем preventDefault()
+  console.log('✅ Валидное комбо, форма отправляется');
+  return true;
+}
+
+
