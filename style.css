@@ -142,7 +142,14 @@ footer{
   
   .navigation nav {
     justify-content: space-between; /*выравнивание с равным расстоянием между элементами*/
-    gap: 0; /*убираем отступы для правильного space-between */
+    gap: 0; /*убираем отступы!!!*/
+    padding: 0; /*убираем внутр отступы */
+    width: 100%; /*на всю ширину */
+  }
+  .navigation a {
+    flex: 1; /*равномерное распределение */
+    text-align: center; /*выравнивание текста по центру */
+    margin: 0; /*убираем внешние отступы */
   }
   
   .company_name h1 {
@@ -169,7 +176,9 @@ footer{
   }
   
   .navigation a {
-    font-size: 22px; /*увеличение шрифта ссылок на 4px (18px + 4px) */
+    font-size: 24px; /*увеличение шрифта ссылок на 4px (18px + 4px) */
+    text-align: center;
+    width: 100%;
   }
   
   .company_name h1 {
