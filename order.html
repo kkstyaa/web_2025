@@ -19,6 +19,7 @@
       <nav>
         <a href="index.html">О нас</a>
         <a href="order.html" id="active">Собрать ланч</a>
+        <a href="checkout.html">Оформить заказ</a>
         <a href="ссылка">Заказы</a>
         <a href="#contacts">Контакты</a>
       </nav>
@@ -192,88 +193,13 @@
       </div>
     </section>
 
-    <!-- ФОРМА ЗАКАЗА -->
-    <section class="order-form-section">
-      <h2>Сделать заказ</h2>
-      <form class="order-form" method="POST" action="https://httpbin.org/post">
-        <div class="form-columns">
-          <!-- Блок с заказом клиента -->
-          <div class="order-column">
-            <!-- Сводка заказа будет добавлена динамически -->
-          </div>
-            <!-- Поле комментариев -->
-        <div class="form-group">
-          <label for="comments">Комментарии к заказу</label>
-          <textarea 
-            id="comments" 
-            name="comments" 
-            rows="4" 
-            placeholder="Например: не добавлять лук, специи отдельно и т.д."
-          ></textarea>
-          <small class="form-note">Необязательное поле</small>
-        </div>
-      </div>
-
-
-          <!-- Блок с данными клиента -->
-          <div class="client-column">
-            <h3>Ваши данные</h3>
-            
-            <div class="form-group">
-              <label for="name">Имя *</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <input type="checkbox" id="newsletter" name="newsletter">
-              <label for="newsletter">Получать информацию о скидках и акциях</label>
-            </div>
-
-            <div class="form-group">
-              <label for="phone">Телефон *</label>
-              <input type="tel" id="phone" name="phone" required>
-            </div>
-
-            <div class="form-group">
-              <label for="address">Адрес доставки *</label>
-              <input type="text" id="address" name="address" required>
-              <small class="form-note">Доставка осуществляется только по Москве</small>
-            </div>
-
-            <div class="form-group">
-              <label>Время доставки *</label>
-              <div class="radio-group">
-                <div class="radio-option">
-                  <input type="radio" id="time-asap" name="delivery_time" value="asap" required>
-                  <label for="time-asap">Как можно скорее</label>
-                </div>
-                <div class="radio-option">
-                  <input type="radio" id="time-specific" name="delivery_time" value="specific">
-                  <label for="time-specific">К указанному времени</label>
-                </div>
-              </div>
-            </div>
-          
-            <div class="form-group">
-              <label for="exact-time">Укажите время доставки</label>
-              <input type="time" id="exact-time" name="exact_time" min="07:00" max="23:00" step="300">
-              <small class="form-note">Доступное время доставки с 7:00 до 23:00</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- Кнопки формы -->
-        <div class="form-buttons">
-          <button type="reset" class="btn-reset">Сбросить</button>
-          <button type="submit" class="btn-submit">Отправить заказ</button>
-        </div>
-      </form>
-    </section>
+    <!-- ИНТЕРАКТИВНАЯ ПАНЕЛЬ ЗАКАЗА -->
+<div class="order-panel" id="order-panel">
+  <div class="panel-total">
+    Итого: <span class="total-amount">0</span>₽
+  </div>
+  <a href="checkout.html" class="btn-checkout disabled">Перейти к оформлению</a>
+</div>
   </main>
 
   <footer>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Food Construct - Оформить заказ</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_order.css">
+  <link rel="stylesheet" href="style_checkout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="container">
+    <div class="company_name">
+      <h1>Food Constructor</h1>
+    </div>
+    <div class="navigation">
+      <nav>
+        <a href="index.html">О нас</a>
+        <a href="order.html">Собрать ланч</a>
+        <a href="checkout.html" id="active">Оформить заказ</a>
+        <a href="ссылка">Заказы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Оформление заказа</h1>
+    
+    <div class="checkout-container">
+      <!-- Раздел 1: Состав заказа -->
+      <section class="order-summary-section">
+        <h2>Состав заказа</h2>
+        <div class="selected-dishes-container" id="selected-dishes-container">
+          <!-- Блюда будут добавлены динамически -->
+        </div>
+        <div class="order-total">
+          <p>Итого: <span id="total-price">0</span>₽</p>
+        </div>
+      </section>
+
+      <!-- Раздел 2: Форма оформления заказа -->
+      <section class="checkout-form-section">
+        <h2>Оформление заказа</h2>
+        <form class="checkout-form" id="checkout-form">
+          <div class="form-group">
+            <label for="full_name">ФИО *</label>
+            <input type="text" id="full_name" name="full_name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="subscribe" name="subscribe" value="1">
+            <label for="subscribe">Получать информацию о скидках и акциях</label>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Телефон *</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+
+          <div class="form-group">
+            <label for="delivery_address">Адрес доставки *</label>
+            <input type="text" id="delivery_address" name="delivery_address" required>
+          </div>
+
+          <div class="form-group">
+            <label>Тип доставки *</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="delivery_now" name="delivery_type" value="now" required>
+                <label for="delivery_now">Как можно скорее</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="delivery_by_time" name="delivery_type" value="by_time">
+                <label for="delivery_by_time">Ко времени</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" id="delivery-time-group" style="display: none;">
+            <label for="delivery_time">Время доставки *</label>
+            <input type="time" id="delivery_time" name="delivery_time" min="07:00" max="23:00" step="300">
+            <small class="form-note">Доступное время: с 7:00 до 23:00 с шагом 5 минут</small>
+          </div>
+
+          <div class="form-group">
+            <label for="comment">Комментарий к заказу</label>
+            <textarea id="comment" name="comment" rows="3" placeholder="Например: не добавлять лук, специи отдельно и т.д."></textarea>
+          </div>
+
+          <!-- Скрытые поля для ID блюд -->
+          <input type="hidden" id="soup_id" name="soup_id">
+          <input type="hidden" id="main_course_id" name="main_course_id">
+          <input type="hidden" id="salad_id" name="salad_id">
+          <input type="hidden" id="drink_id" name="drink_id">
+          <input type="hidden" id="dessert_id" name="dessert_id">
+
+          <div class="form-buttons">
+            <button type="button" class="btn-back" onclick="window.location.href='order.html'">Вернуться к выбору</button>
+            <button type="submit" class="btn-submit" id="submit-order">Отправить заказ</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div id="contacts" class="contacts">
+      <p>Позвонить нам: <a href="tel:+79991234567" class="footer-link">+7 (999) 123-45-67</a></p>
+      <p>Написать нам: <a href="mailto:foodconstructor@inbox.ru" class="footer-link">foodconstructor@inbox.ru</a></p>
+    </div>
+  </footer>
+
+  <script src="checkout.js"></script>
+</body>
+</html>

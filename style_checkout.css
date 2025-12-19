@@ -1,0 +1,360 @@
+/* Основной контейнер */
+.checkout-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 30px 0;
+}
+
+@media (max-width: 900px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* Раздел с составом заказа */
+.order-summary-section {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f1eee9;
+}
+
+.order-summary-section h2 {
+  color: #321832;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #fce592;
+  font-size: 24px;
+}
+
+/* Контейнер для выбранных блюд */
+.selected-dishes-container {
+  min-height: 300px;
+  margin-bottom: 20px;
+}
+
+/* Сообщение о пустом заказе */
+.empty-order-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-style: italic;
+  border: 2px dashed #e0e0e0;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.empty-order-message a {
+  color: #f9d467;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.empty-order-message a:hover {
+  color: #321832;
+  text-decoration: underline;
+}
+
+/* Карточка блюда на странице оформления */
+.dish-card-checkout {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dish-card-checkout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dish-card-checkout img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.dish-info-checkout {
+  flex-grow: 1;
+}
+
+.dish-info-checkout h3 {
+  margin: 0 0 5px 0;
+  color: #321832;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dish-info-checkout p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.dish-price-checkout {
+  font-weight: bold;
+  color: #321832;
+  font-size: 18px;
+  margin-right: 15px;
+}
+
+/* Кнопка удаления */
+.btn-remove {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-remove:hover {
+  background-color: #ff5252;
+}
+
+/* Итоговая сумма */
+.order-total {
+  background-color: #fce592;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 20px;
+  color: #321832;
+  margin-top: 20px;
+}
+
+.order-total span {
+  font-size: 24px;
+  color: #321832;
+}
+
+/* Раздел с формой */
+.checkout-form-section {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f1eee9;
+}
+
+.checkout-form-section h2 {
+  color: #321832;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #fce592;
+  font-size: 24px;
+}
+
+/* Стили формы */
+.checkout-form .form-group {
+  margin-bottom: 20px;
+}
+
+.checkout-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #321832;
+  font-size: 16px;
+}
+
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="tel"],
+.checkout-form input[type="time"],
+.checkout-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "Public Sans", sans-serif;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+  outline: none;
+  border-color: #fce592;
+}
+
+.checkout-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Радиокнопки и чекбоксы */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+.radio-option label {
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+}
+
+.checkbox-group label {
+  margin: 0;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+/* Подсказки */
+.form-note {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Кнопки формы */
+.form-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.btn-back {
+  background-color: #f1eee9;
+  color: #321832;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Public Sans", sans-serif;
+  flex: 1;
+}
+
+.btn-back:hover {
+  background-color: #e0ddd9;
+  transform: translateY(-2px);
+}
+
+.btn-submit {
+  background-color: #fce592;
+  color: #321832;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Public Sans", sans-serif;
+  flex: 1;
+}
+
+.btn-submit:hover {
+  background-color: #f9d467;
+  transform: translateY(-2px);
+}
+
+.btn-submit:disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Сообщения об ошибках */
+.error-message {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 5px;
+  display: none;
+}
+
+/* Уведомления */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  z-index: 1000;
+  max-width: 400px;
+  border-left: 4px solid #4CAF50;
+}
+
+.notification.error {
+  border-left-color: #ff6b6b;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+  .checkout-container {
+    margin: 15px 0;
+  }
+  
+  .order-summary-section,
+  .checkout-form-section {
+    padding: 20px 15px;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+  }
+  
+  .dish-card-checkout {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .dish-card-checkout img {
+    width: 100%;
+    height: 150px;
+  }
+  
+  .dish-info-checkout h3 {
+    text-align: center;
+  }
+}
