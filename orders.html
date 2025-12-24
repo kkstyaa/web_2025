@@ -10,22 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 </head>
 <body>
-  <header class="container">
-    <div class="company_name">
-      <h1>Food Constructor</h1>
-    </div>
-    <div class="navigation">
-      <nav>
-        <a href="index.html">О нас</a>
-        <a href="order.html">Собрать ланч</a>
-        <a href="checkout.html">Оформить заказ</a>
-        <a href="orders.html" id="active">Заказы</a>
-        <a href="#contacts">Контакты</a>
-      </nav>
-    </div>
-  </header>
+   <!-- ВСТАВЬТЕ ЭТО ПРЯМО ПОСЛЕ <body> -->
+    <div id="bootstrap-navbar"></div>
 
   <main class="container">
     <h1>Мои заказы</h1>
@@ -168,5 +159,46 @@
   </div>
 
   <script src="orders.js"></script>
+  <script>
+    // Загружаем навигацию
+    fetch('bootstrap-header.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('bootstrap-navbar').innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading navbar:', error);
+            
+            // СОЗДАЕМ ПРАВИЛЬНУЮ НАВИГАЦИЮ С АКТИВНОЙ ССЫЛКОЙ
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            
+            document.getElementById('bootstrap-navbar').innerHTML = `
+                <nav class="navbar navbar-expand-lg navbar-light" style="background:white;box-shadow:0 2px 10px rgba(0,0,0,0.08);padding:1rem 0;position:fixed;top:0;width:100%;z-index:1000;">
+                    <div class="container">
+                        <a class="navbar-brand" href="index.html" style="font-family:'Public Sans',sans-serif;font-weight:700;font-size:1.8rem;color:#321832;">
+                            Food<span style="color:#FFD166;">Constructor</span>
+                        </a>
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link" href="index.html" style="font-weight:600;color:#321832;padding:0.5rem 1.2rem;border-radius:20px;margin:0 3px;${currentPage.includes('index') || currentPage === '' ? 'background:#FFD166;color:#321832 !important;' : ''}">Главная</a>
+                            <a class="nav-link" href="order.html" style="font-weight:600;color:#321832;padding:0.5rem 1.2rem;border-radius:20px;margin:0 3px;${currentPage.includes('order') && !currentPage.includes('orders') ? 'background:#FFD166;color:#321832 !important;' : ''}">Собрать ланч</a>
+                            <a class="nav-link" href="checkout.html" style="font-weight:600;color:#321832;padding:0.5rem 1.2rem;border-radius:20px;margin:0 3px;${currentPage.includes('checkout') ? 'background:#FFD166;color:#321832 !important;' : ''}">Оформить заказ</a>
+                            <a class="nav-link" href="orders.html" style="font-weight:600;color:#321832;padding:0.5rem 1.2rem;border-radius:20px;margin:0 3px;${currentPage.includes('orders') ? 'background:#FFD166;color:#321832 !important;' : ''}">Мои заказы</a>
+                        </div>
+                    </div>
+                </nav>
+                <style>
+                    body {
+                        padding-top: 70px !important;
+                    }
+                    .nav-link {
+                        transition: all 0.3s ease;
+                    }
+                    .nav-link:hover {
+                        background: rgba(255, 209, 102, 0.2) !important;
+                    }
+                </style>
+            `;
+        });
+</script>
 </body>
 </html>
